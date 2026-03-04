@@ -11,117 +11,58 @@ Manual Set-up
 1. **Ensure Intellij JDK 17 is defined as an SDK**, as described [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk) -- this step is not needed if you have used JDK 17 in a previous Intellij project.
 1. **Import the project _as a Gradle project_**, as described [here](https://se-education.org/guides/tutorials/intellijImportGradleProject.html).
 1. **Verify the setup**: After the importing is complete, locate the `src/main/java/seedu/duke/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
- 
+    ```
+   > Task :compileJava
+   > Task :processResources NO-SOURCE
+   > Task :classes
+   
+   > Task :Duke.main()
+   Hello from
+    ____        _        
+   |  _ \ _   _| | _____ 
+   | | | | | | | |/ / _ \
+   | |_| | |_| |   <  __/
+   |____/ \__,_|_|\_\___|
+   
+   What is your name?
+   ```
+   Type some word and press enter to let the execution proceed to the end.
 
-Simple Set-up [Recommended] (To be completed)
-1. Ensure you have Java 17 or above installed in your Computer.
-	Mac users: Ensure you have the precise JDK version prescribed here.
-2. Download the latest .jar file from here.
-3. Copy the file to the folder you want to use as the home folder for your AddressBook.
-4. Open a command terminal, cd into the folder you put the jar file in, and use the java -jar addressbook.jar command to run the application.
-A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
 
-Features
-Creating a new Medication Class: create
-	Creates a new medication product in the database to be monitored.
+## Build automation using Gradle
 
-	Format:  		create n/<NAME> u/<UNIT>
-	Example:	
-create n/Paracetamol 500mg u/tablets
-	Example Output:
-Product created: Paracetamol 500mg (tablets)
+* This project uses Gradle for build automation and dependency management. It includes a basic build script as well (i.e. the `build.gradle` file).
+* If you are new to Gradle, refer to the [Gradle Tutorial at se-education.org/guides](https://se-education.org/guides/tutorials/gradle.html).
 
-Listing all Medications: list
-List all products with its corresponding current quantity, earliest expiring       
-date and stock health status.
+## Testing
 
-	Follows First Expiry First Out (FEFO) logic, displays expiry of earliest expiry 
-only.
+### I/O redirection tests
 
-	Format:				list
-	Example Output: 	Paracetamol 500mg
-  						Total: 350 tablets
- 		 				Earliest Exp: 2030-09-30
-   						Status: Healthy
+* To run _I/O redirection_ tests (aka _Text UI tests_), navigate to the `text-ui-test` and run the `runtest(.bat/.sh)` script.
 
-						Vyvanse 70mg
-   						Total: 40 pieces
-						Earliest Exp: 2026-03-10
-						Status: Low Stock
+### JUnit tests
 
-Deleting a Medication: delete
-Delete a medication completely from the database, using the two methods. 
+* A skeleton JUnit test (`src/test/java/seedu/duke/DukeTest.java`) is provided with this project template. 
+* If you are new to JUnit, refer to the [JUnit Tutorial at se-education.org/guides](https://se-education.org/guides/tutorials/junit.html).
 
-	Format: 		delete n/<NAME> 
-					delete i/<INDEX>
-	Example:
-					delete Paracetamol q/200 exp/2026-12-31
-					delete 1
-	Example Output: 
-					Deleted product:
-					Paracetamol 500mg
+## Checkstyle
 
-Adding a Medication Batch: batch
-Adds a batch of medical stock.
+* A sample CheckStyle rule configuration is provided in this project.
+* If you are new to Checkstyle, refer to the [Checkstyle Tutorial at se-education.org/guides](https://se-education.org/guides/tutorials/checkstyle.html).
 
-	Format: 		batch n/<NAME> q/<QUANTITY> exp/<EXPIRY_DATE>
+## CI using GitHub Actions
 
-	Example:
-					batch Paracetamol q/200 exp/2026-12-31
-					Example Output: 
-					Added batch to Paracetamol 500mg
-					Quantity: 200
-					Expiry: 2026-12-31
+The project uses [GitHub actions](https://github.com/features/actions) for CI. When you push a commit to this repo or PR against it, GitHub actions will run automatically to build and verify the code as updated by the commit/PR.
 
-Withdrawing Medication from the System: withdraw, wtd
-Withdraws a quantity of the keyed in medication from the database. 
+## Documentation
 
-	Format: 		wtd PRODUCT NAME q/QUANTITY
-					withdraw PRODUCT NAME q/QUANTITY
-				(Both withdraw and wtd can be used as command words in the CLI)
-	Example:
-					wtd Paracetamol q/50
-					Example Output: 
-					Withdrawn 50 tablets.
-					Remaining total: 300 tablets
+`/docs` folder contains a skeleton version of the project documentation.
 
-Quitting the Program: exit, quit
-Type quit in the CLI to end the program.
-
-	Format: 	 	exit
-
-Saving the data
-– to be added – 
-
-Editing the data file
-– to be added – 
-
-FAQ
-– to be added – 
-
-Known issues
-– to be added – 
-
-
-Command summary
-
-Action
-Format
-ADD
-create n/NAME u/UNIT
-LIST
-list
-DELETE
-delete n/<NAME> 
-delete i/<INDEX> 
-BATCH
-batch n/<NAME> q/<QUANTITY> exp/<EXPIRY_DATE>
-WITHDRAW
-withdraw PRODUCT NAME q/QUANTITY
-wtd PRODUCT NAME q/QUANTITY
-QUIT
-quit or exit
-
-
-
-
+Steps for publishing documentation to the public: 
+1. If you are using this project template for an individual project, go your fork on GitHub.<br>
+   If you are using this project template for a team project, go to the team fork on GitHub.
+1. Click on the `settings` tab.
+1. Scroll down to the `GitHub Pages` section.
+1. Set the `source` as `master branch /docs folder`.
+1. Optionally, use the `choose a theme` button to choose a theme for your documentation.
