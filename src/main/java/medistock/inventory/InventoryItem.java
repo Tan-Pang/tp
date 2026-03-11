@@ -1,5 +1,4 @@
 package medistock.inventory;
-
 /**
  * Represents an item in the medical inventory with a name, unit and minimum threshold.
  */
