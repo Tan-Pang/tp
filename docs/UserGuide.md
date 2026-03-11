@@ -22,14 +22,15 @@
 Creates a new medication product in the database to be monitored.
 * **Format:** `create n/NAME u/UNIT min/THRESHOLD`
 * **Example:** `create n/Paracetamol u/500mg min/250`
-* **Expected Output:**
+* **Example Output:**
   ```text
-  Product created: Paracetamol 500mg Minimum threshold:500
-  
+  Product created: Paracetamol 500mg Minimum threshold: 500
+  ```
 ### Listing all Medications: `list`
 List all items in the inventory with their corresponding stock quantity, earliest expiry       
 date and stock health status.
 * **Format:** `list`
+* **Example Output:**
   ``` text
   Current Pharmaceutical Inventory: 
   ____________________________________________________________
@@ -41,13 +42,15 @@ date and stock health status.
         Total: 60 Tablets 
         Earliest Exp: 2028-06-07
         Status: Critical
-  ____________________________________________________________```
+  ____________________________________________________________
+  ```
 
 ### Deleting a Pharmaceutical: `delete`
 Removes a task from your list permanently.
 * **Format:** `delete n/NAME u/UNIT` or `delete i/INDEX`
 * **Example:** `delete n/Vyvanse u/70mg` or `delete i/2`
-    ``` text
+* **Example Output:**
+  ``` text
   The following Pharmaceutical has been deleted   
   ____________________________________________________________
   2. Vyvanse 70mg
@@ -55,12 +58,13 @@ Removes a task from your list permanently.
    Earliest Exp: 2028-06-07
    Status: Critical
   ____________________________________________________________
-
+  ```
 ### Adding an Item Batch: `batch`
 Adds a batch of a specific item to the inventory. 
 
 * **Format:** `batch n/NAME u/UNIT q/QUANTITY` 
 * **Example:** `batch n/Vyvanse u/70mg q/200`
+* **Example Output:**
     ``` text
   200 Tablets of Vyvanse has added to the Inventory 
   ____________________________________________________________
@@ -70,14 +74,14 @@ Adds a batch of a specific item to the inventory.
     Earliest Exp: 2028-06-07
     Status: Healthy
   ____________________________________________________________
-
+  ```
 ### Withdrawing Medication from the Inventory: `withdraw`, `wtd`
 Withdraws a quantity of the keyed in medication from the database. 
 * **Format:** `withdraw <PRODUCT_NAME> u/<UNIT> q/<QUANTITY>`  ***or*** <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   `wtd <PRODUCT_NAME> u/<UNIT> q/<QUANTITY>`
 * **Example:** `wtd Paracetamol u/500mg q/50`
-* **Expected Output:**
+* **Example Output:**
   ```text
   50 Tablets of Paracetamol has withdrawn from the Inventory 
   ____________________________________________________________
@@ -87,14 +91,15 @@ Withdraws a quantity of the keyed in medication from the database.
     Earliest Exp: 2030-09-30
     Status: Crticial
   ____________________________________________________________
-
-### Quitting the Program: `bye`
+  ```
+### Quitting the Program: `exit`, `quit`
 Saves the inventory and safely exits from the application. <br>
 
-* `bye`
-Example of usage: 
+* Both `quit` and `exit` can be used to quit the application.
+* Example output of `exit`: 
 
 ```text
+exit
 Inventory saved. 
 Thank you for using MediStock, have a nice day!`
 ```
@@ -117,11 +122,11 @@ Thank you for using MediStock, have a nice day!`
 ### Command summary
 The following table summarizes the available commands:
 
-| Action               | Format                                                                     | Example                          |
-|:---------------------|:---------------------------------------------------------------------------|:---------------------------------|
-| **CREATE ITEM** | `create n/NAME u/UNIT min/THRESHOLD`                                       | `create n/Vyvanse u/70mg min/50` |
-| **LIST ITEMS** | `list`                                                                     | `list`                           |
-| **DELETE ITEM** | `delete n/NAME u/UNIT` or `delete i/INDEX`                                 | `delete i/2`                     |
+| Action             | Format                                                                     | Example                          |
+|:-------------------|:---------------------------------------------------------------------------|:---------------------------------|
+| **CREATE ITEM**    | `create n/NAME u/UNIT min/THRESHOLD`                                       | `create n/Vyvanse u/70mg min/50` |
+| **LIST INVENTORY** | `list`                                                                     | `list`                           |
+| **DELETE ITEM**    | `delete n/NAME u/UNIT` or `delete i/INDEX`                                 | `delete n/Vyvanse u/70mg`                     |
 | **ADD ITEM BATCH** | `batch n/NAME u/UNIT q/QUANTITY`                                           | `batch n/Vyvanse u/70mg q/200`   |
-| **WITHDRAW ITEM** | `wtd <PRODUCT_NAME> u/<UNIT> q/<QUANTITY>`                                 | `wtd n/Vyvanse u/70mg q/50`      |
-| **QUIT** | `exit` or `quit`                                                           | `exit`                           |
+| **WITHDRAW ITEMS** | `wtd <PRODUCT_NAME> u/<UNIT> q/<QUANTITY>`                                 | `wtd n/Vyvanse u/70mg q/50`      |
+| **QUIT**           | `exit` or `quit`                                                           | `exit`                           |
