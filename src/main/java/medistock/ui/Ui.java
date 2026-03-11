@@ -1,5 +1,8 @@
 package medistock.ui;
 
+import medistock.inventory.InventoryItem;
+
+import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
@@ -17,6 +20,16 @@ public class Ui {
     public Ui() {
         this.scanner = new Scanner(System.in);
     }
+
+    /**
+     * Reads the next command from the user. Returns the full string entered into the console.
+     *
+     * @return The user's input line.
+     */
+    public String getInput() {
+        return scanner.nextLine();
+    }
+
 
     /**
      * Reads a command from the user.
@@ -43,5 +56,40 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * Prints an error message.
+     *
+     * @param e the error message printed
+     */
+    public void printError(String e) {
+        printLine();
+        System.out.println("Invalid Input: " + e);
+        printLine();
+    }
+
+    public void printExit() {
+        System.out.println("Inventory saved");
+        System.out.println("Thank you for using MediStock, have a nice day!");
+    }
+
+    public static void printCreate(String name, String unit, int minimumThreshold) {
+        printLine();
+        System.out.println(String.format("Product created:\n" + name + " (" + unit + ")\n" + "Minimum threshold: "
+                        + minimumThreshold));
+        printLine();
+    }
+
+    public static void printItemDetails(InventoryItem item) {
+        String name = item.getName();
+        System.out.println(name);
+    }
+
+    public static void printBatch(int quantity, InventoryItem item, LocalDate date) {
+        System.out.println(String.format("Batch of %d %s, expiring on %3$tF has been successfully added!", quantity,
+                        item.getName(), date));
+        printLine();
+        printItemDetails(item);
+        printLine();
+    }
 
 }

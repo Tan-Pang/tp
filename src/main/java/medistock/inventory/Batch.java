@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * quantity, and expiry date. Batches are immutable once created except for quantity.
  */
 public class Batch {
-    private final String batchNumber;
+    private final int batchNumber;
     private int quantity;
     private final LocalDate expiryDate;
 
@@ -19,13 +19,13 @@ public class Batch {
      * @param quantity The initial stock count of the batch.
      * @param expiryDate The expiry date of the batch.
      */
-    public Batch(String batchNumber, int quantity, LocalDate expiryDate) {
+    public Batch(int batchNumber, int quantity, LocalDate expiryDate) {
         this.batchNumber = batchNumber;
         this.quantity = quantity;
         this.expiryDate = expiryDate;
     }
 
-    public String getBatchNumber() {
+    public int getBatchNumber() {
         return batchNumber;
     }
 

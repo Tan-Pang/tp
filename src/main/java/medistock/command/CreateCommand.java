@@ -3,6 +3,7 @@ package medistock.command;
 import medistock.exception.MediStockException;
 import medistock.inventory.Inventory;
 import medistock.inventory.InventoryItem;
+import medistock.ui.Ui;
 
 public class CreateCommand extends Command {
     private final String name;
@@ -16,9 +17,9 @@ public class CreateCommand extends Command {
     }
 
     @Override
-    public String execute(Inventory inventory) throws MediStockException {
+    public void execute(Inventory inventory, Ui ui) throws MediStockException {
         InventoryItem item = new InventoryItem(name, unit, minimumThreshold);
         inventory.addItem(item);
-        return "Product created:\n" + name + " (" + unit + ")\n" + "Minimum threshold: " + minimumThreshold;
+        ui.printCreate(name,unit,minimumThreshold);
     }
 }

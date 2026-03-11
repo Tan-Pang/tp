@@ -12,7 +12,7 @@ public class InventoryItem {
     private final String name;
     private final String unit;
     private final int minimumThreshold;
-    private int quantity;
+    private int batchQuantity;
     private final List<Batch> batches;
 
     /**
@@ -27,7 +27,7 @@ public class InventoryItem {
         this.name = name;
         this.unit = unit;
         this.minimumThreshold = minimumThreshold;
-        this.quantity = 0;
+        this.batchQuantity = 0;
         this.batches = new ArrayList<>();
     }
 
@@ -49,12 +49,32 @@ public class InventoryItem {
     }
 
     /**
+     * Returns the amount of batches insides the item's stock
+     *
+     * @return the quanity of batches
+     */
+    public int getBatchQuantity() {
+        if (batches.isEmpty()) {
+            return 0;
+        }
+        else {
+            return batches.size();
+        }
+    }
+
+    /**
      * Returns the total quantity of this item across all batches.
      *
      * @return The total quantity.
      */
     public int getQuantity() {
-        return quantity;
+        int totalQuantity = 0;
+
+        for (Batch batch : batches) {
+            totalQuantity += batch.getQuantity();
+        }
+
+        return totalQuantity;
     }
 
     /**
@@ -66,7 +86,6 @@ public class InventoryItem {
      */
     public void addBatch(Batch batch) {
         batches.add(batch);
-        quantity += batch.getQuantity();
     }
 
     /**
@@ -75,6 +94,6 @@ public class InventoryItem {
      * @return true if stock is low, false otherwise.
      */
     public boolean isLowStock() {
-        return quantity < minimumThreshold;
+        return getQuantity() < minimumThreshold;
     }
 }
