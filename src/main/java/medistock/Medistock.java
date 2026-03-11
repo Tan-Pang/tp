@@ -3,14 +3,13 @@ package medistock;
 import medistock.command.Command;
 import medistock.exception.MediStockException;
 import medistock.inventory.Inventory;
-import medistock.inventory.InventoryItem;
 import medistock.parser.Parser;
 import medistock.storage.Storage;
 import medistock.ui.Ui;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Scanner;
+
 
 public class Medistock {        // I think we need to change name of class and file to MediStock
 

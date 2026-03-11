@@ -10,5 +10,7 @@ public abstract class Command {
 
     public abstract void execute(Inventory inventory, Ui ui) throws MediStockException;
 
-    public boolean isExit() {return isExit;};
+    public boolean isExit() {
+        return isExit;
+    };
 }

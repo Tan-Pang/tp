@@ -31,9 +31,13 @@ public class Parser {
     }
 
     /**
-     * Serves as helper function, that returns the useful starting index of an input Parameter
+     * Extracts an argument from the input text based on a starting prefix index.
+     * If a second index is provided, it treats it as the start of the next parameter.
      *
-
+     * @param text   User input string.
+     * @param index1 The starting index of the current parameter prefix (e.g., "n/").
+     * @param index2 Optional: The starting index of the next parameter prefix.
+     * @return The trimmed string value of the argument.
      */
     private static String getArgument(String text, int index1, int... index2) {
         if (index2.length > 0) {
@@ -44,11 +48,25 @@ public class Parser {
         }
     }
 
+    /**
+     * Specifically extracts the value for the "min/" parameter.
+     *
+     * @param text     The full input string.
+     * @param minIndex The starting index of the "min/" prefix.
+     * @return The trimmed string value of the minimum threshold.
+     */
     private static String getMinimum(String text, int minIndex) {
         return text.substring(minIndex + 4).trim();
     }
 
 
+    /**
+     * Parses the "batch" command input and prepares a BatchCommand for execution.
+     *
+     * @param text The user input string starting with "batch".
+     * @return A BatchCommand.
+     * @throws MediStockException If the format is invalid or parameters are out of order.
+     */
     private static Command prepareBatch(String text) throws MediStockException {
         int nameIndex = text.indexOf("n/");
         int quantIndex = text.indexOf("q/");
@@ -68,7 +86,13 @@ public class Parser {
         return new BatchCommand(name, quant, expiryDate);
     }
 
-
+    /**
+     * Parses the "create" command input and prepares a CreateCommand for execution.
+     *
+     * @param text The user input string starting with "create".
+     * @return A CreateCommand object.
+     * @throws MediStockException If parameters are missing, empty, or incorrectly formatted.
+     */
     private static Command prepareCreate(String text) throws MediStockException {
         int nameIndex = text.indexOf("n/");
         int unitIndex = text.indexOf("u/");
