@@ -119,8 +119,8 @@ public class Ui {
     }
 
     public static void printBatch(int quantity, InventoryItem item, LocalDate date) {
-        System.out.printf("Batch of %d %s, expiring on %3$tF%n has been successfully added to the inventory!%n", quantity,
-                item.getName(), date);
+        System.out.printf("Batch of %d %s, expiring on %3$tF %n has been successfully to" +
+                " the inventory!%n", quantity, item.getName(), date);
         printLine();
         System.out.printf("Stock of %s is now:", item.getName());
         printItemDetails(item);
