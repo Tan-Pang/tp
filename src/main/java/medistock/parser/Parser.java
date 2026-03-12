@@ -5,6 +5,7 @@ import medistock.command.Command;
 import medistock.command.CreateCommand;
 import medistock.command.ExitCommand;
 import medistock.command.WithdrawCommand;
+import medistock.command.ListCommand;
 import medistock.exception.MediStockException;
 
 import java.time.LocalDate;
@@ -19,6 +20,8 @@ public class Parser {
             return prepareBatch(text);
         } else if (text.startsWith("withdraw")) {
             return prepareWithdraw(text);
+        } else if (text.equals("list")) {
+            return new ListCommand();
         } else if (text.startsWith("exit") || text.startsWith("quit")) {
             return new ExitCommand();
         } else {
@@ -123,7 +126,6 @@ public class Parser {
         if (min <= 0) {
             throw new MediStockException("Minimum threshold must be greater than 0.");
         }
-
         return new CreateCommand(name, unit, min);
     }
 

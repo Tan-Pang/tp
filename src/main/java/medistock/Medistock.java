@@ -33,10 +33,8 @@ public class Medistock {        // I think we need to change name of class and f
         boolean isRunning = true;
 
         while (isRunning) {
-
-            String input = ui.getInput();
-
             try {
+                String input = ui.getInput();
                 Command command = Parser.parseCommand(input);
                 command.execute(inventory, ui);
                 if (input.equals("exit")) {

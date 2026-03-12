@@ -11,8 +11,9 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    public static final String EXIT_MESSAGE = "Thank you for using medistock!";
-    public static final String WELCOME_MESSAGE = "Welcome to medistock";
+    private static final String EXIT_MESSAGE =
+            "Inventory saved\nThank you for using MediStock, have a nice day!";
+    private static final String WELCOME_MESSAGE = "Welcome to medistock";
     private final Scanner scanner;
 
     /**
@@ -52,11 +53,6 @@ public class Ui {
         printLine();
     }
 
-    public static void exit() {
-        printLine();
-        System.out.println(EXIT_MESSAGE);
-        printLine();
-    }
 
     /**
      * Prints an error message.
@@ -69,10 +65,36 @@ public class Ui {
         printLine();
     }
 
-    public void printExit() {
+    public void printExitMessage() {
         printLine();
-        System.out.println("Inventory saved");
-        System.out.println("Thank you for using MediStock, have a nice day!");
+        System.out.println(EXIT_MESSAGE);
+        printLine();
+    }
+
+    /**
+     * Shows the inventory list to the user.
+     *
+     * @param inventory The inventory to display.
+     */
+    public void showInventoryList(Inventory inventory) {
+        if (inventory.getAllItems().isEmpty()) {
+            printEmptyInventoryMessage();
+        } else {
+            printLine();
+            System.out.println("Here are the medicines in your inventory:");
+            int itemCount = 1;
+            for (InventoryItem item : inventory.getAllItems()) {
+                System.out.println(itemCount + ". " + item.getName() + " (" + item.getUnit() + ") " +
+                        "| Qty: " + item.getQuantity());
+                itemCount++;
+            }
+            printLine();
+        }
+    }
+
+    private static void printEmptyInventoryMessage() {
+        printLine();
+        System.out.println("Your inventory is empty.");
         printLine();
     }
 
