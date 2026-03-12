@@ -103,10 +103,11 @@ public class InventoryItem {
 
     public String  getStockStatus() {
         int quantity = getQuantity();
-        if(isLowStock()) {
+        if (isLowStock()) {
             return "Critical";
+        } else {
+            return "Healthy";
         }
-        else return "Healthy";
     }
 
     /**

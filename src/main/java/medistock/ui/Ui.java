@@ -101,9 +101,9 @@ public class Ui {
         int itemCount = 1;
         for (InventoryItem item : inventory.getAllItems()) {
             String foundName = item.getName();
-                if (searchName.equals(item.getName())) {
-                    return itemCount;
-                }
+            if (searchName.equals(item.getName())) {
+                return itemCount;
+            }
             itemCount = itemCount + 1;
         }
         return -1;
@@ -129,14 +129,14 @@ public class Ui {
         printLine();
     }
 
+    public void printSpacing(){
+        System.out.print("    ");
+    }
+
     public static void printItemDetails(InventoryItem item) {
         String unit = item.getUnit();
         int quantity = item.getQuantity();
         System.out.println(quantity + " " + unit);
-    }
-
-    public void printSpacing(){
-        System.out.print("    ");
     }
 
     public void printItemDetails(Inventory inventory, InventoryItem item) throws MediStockException {
@@ -145,15 +145,18 @@ public class Ui {
 
         System.out.println(String.format("Stock of %s is now:", itemName));
         printSpacing();
-        System.out.print(String.format("%d. %s (%d) %n", getItemIndex(inventory, itemName), itemName,item.getMinimumThreshold()));
+        System.out.print(String.format("%d. %s (%d) %n", getItemIndex(inventory, itemName),
+                        itemName,item.getMinimumThreshold()));
         printSpacing();
         System.out.println(String.format("Total: %d %s", item.getQuantity(), item.getUnit()));
         printSpacing();
-        System.out.println(String.format("Earliest Exp: %tF %n    Status: %s", item.getEarliestExpiry(), item.getStockStatus()));
+        System.out.println(String.format("Earliest Exp: %tF %n    Status: %s", item.getEarliestExpiry(),
+                        item.getStockStatus()));
     }
 
 
-    public void printBatch(Inventory inventory, InventoryItem item, int quantity, LocalDate date) throws MediStockException {
+    public void printBatch(Inventory inventory, InventoryItem item, int quantity, LocalDate date)
+                    throws MediStockException {
 
         String itemName = item.getName();
 

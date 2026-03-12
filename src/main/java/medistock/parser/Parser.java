@@ -79,7 +79,8 @@ public class Parser {
         }
 
         if (!(nameIndex < quantIndex && quantIndex < expiryIndex)) {
-            throw new MediStockException("Ensure the arguments are in the correct order: n/NAME q/QUANTITY d/EXPIRY_DATE");
+            throw new MediStockException("Ensure the arguments are in the correct order:" +
+                            " n/NAME q/QUANTITY d/EXPIRY_DATE");
         }
 
         String name = getArgument(text, nameIndex, quantIndex).trim();

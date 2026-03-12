@@ -8,13 +8,13 @@ import medistock.parser.Parser;
 import medistock.ui.Ui;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import medistock.command.BatchCommand;
 import medistock.inventory.InventoryItem;
 import java.time.LocalDate;
-import static org.junit.jupiter.api.Assertions.*;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class BatchTest {
