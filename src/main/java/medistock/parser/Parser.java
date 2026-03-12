@@ -4,6 +4,7 @@ import medistock.command.BatchCommand;
 import medistock.command.Command;
 import medistock.command.CreateCommand;
 import medistock.command.ExitCommand;
+import medistock.command.WithdrawCommand;
 import medistock.exception.MediStockException;
 
 import java.time.LocalDate;
@@ -16,21 +17,24 @@ public class Parser {
             return prepareCreate(text);
         } else if (text.startsWith("batch")) {
             return prepareBatch(text);
+        } else if (text.startsWith("withdraw")) {
+            return prepareWithdraw(text);
         } else if (text.startsWith("exit") || text.startsWith("quit")) {
             return new ExitCommand();
-        } else  {
+        } else {
             throw new MediStockException("Unknown command.");
         }
-
 
     }
 
     /**
      * Extracts an argument from the input text based on a starting prefix index.
-     * If a second index is provided, it treats it as the start of the next parameter.
+     * If a second index is provided, it treats it as the start of the next
+     * parameter.
      *
      * @param text   User input string.
-     * @param index1 The starting index of the current parameter prefix (e.g., "n/").
+     * @param index1 The starting index of the current parameter prefix (e.g.,
+     *               "n/").
      * @param index2 Optional: The starting index of the next parameter prefix.
      * @return The trimmed string value of the argument.
      */
@@ -38,7 +42,7 @@ public class Parser {
         if (index2.length > 0) {
             return text.substring(index1 + 2, index2[0]).trim();
         } else {
-            return text.substring(index1+2).trim();
+            return text.substring(index1 + 2).trim();
         }
     }
 
@@ -53,13 +57,13 @@ public class Parser {
         return text.substring(minIndex + 4).trim();
     }
 
-
     /**
      * Parses the "batch" command input and prepares a BatchCommand for execution.
      *
      * @param text The user input string starting with "batch".
      * @return A BatchCommand.
-     * @throws MediStockException If the format is invalid or parameters are out of order.
+     * @throws MediStockException If the format is invalid or parameters are out of
+     *                            order.
      */
     private static Command prepareBatch(String text) throws MediStockException {
         int nameIndex = text.indexOf("n/");
@@ -75,7 +79,7 @@ public class Parser {
 
         String name = getArgument(text, nameIndex, quantIndex);
         int quant = Integer.parseInt(getArgument(text, quantIndex, expiryIndex));
-        LocalDate expiryDate = LocalDate.parse(getArgument(text,expiryIndex));
+        LocalDate expiryDate = LocalDate.parse(getArgument(text, expiryIndex));
 
         return new BatchCommand(name, quant, expiryDate);
     }
@@ -85,7 +89,8 @@ public class Parser {
      *
      * @param text The user input string starting with "create".
      * @return A CreateCommand object.
-     * @throws MediStockException If parameters are missing, empty, or incorrectly formatted.
+     * @throws MediStockException If parameters are missing, empty, or incorrectly
+     *                            formatted.
      */
     private static Command prepareCreate(String text) throws MediStockException {
         int nameIndex = text.indexOf("n/");
@@ -120,6 +125,47 @@ public class Parser {
         }
 
         return new CreateCommand(name, unit, min);
+    }
+
+    /**
+     * Parses the "withdraw" command input and prepares a WithdrawCommand for
+     * execution.
+     *
+     * @param text The user input string starting with "withdraw".
+     * @return A WithdrawCommand.
+     * @throws MediStockException If the format is invalid or parameters are out of
+     *                            order.
+     */
+    private static Command prepareWithdraw(String text) throws MediStockException {
+        int nameIndex = text.indexOf("n/");
+        int quantIndex = text.indexOf("q/");
+
+        if (nameIndex == -1 || quantIndex == -1) {
+            throw new MediStockException("Invalid withdraw format. Use: withdraw n/NAME q/QUANTITY");
+        }
+        if (!(nameIndex < quantIndex)) {
+            throw new MediStockException("Use withdraw format: withdraw n/NAME q/QUANTITY");
+        }
+
+        String name = getArgument(text, nameIndex, quantIndex);
+        String quantText = getArgument(text, quantIndex);
+
+        if (name.isEmpty() || quantText.isEmpty()) {
+            throw new MediStockException("Name and quantity must not be empty.");
+        }
+
+        int quant;
+        try {
+            quant = Integer.parseInt(quantText);
+        } catch (NumberFormatException e) {
+            throw new MediStockException("Quantity must be a valid number.");
+        }
+
+        if (quant <= 0) {
+            throw new MediStockException("Quantity must be greater than 0.");
+        }
+
+        return new WithdrawCommand(name, quant);
     }
 
 }

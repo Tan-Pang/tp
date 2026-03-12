@@ -4,7 +4,8 @@ import java.time.LocalDate;
 
 /**
  * Represents a batch of medical inventory items with a unique batch number,
- * quantity, and expiry date. Batches are immutable once created except for quantity.
+ * quantity, and expiry date. Batches are immutable once created except for
+ * quantity.
  */
 public class Batch {
     private final int batchNumber;
@@ -16,8 +17,8 @@ public class Batch {
      * The batch number and expiry date are immutable once set.
      *
      * @param batchNumber The unique identifier for this batch.
-     * @param quantity The initial stock count of the batch.
-     * @param expiryDate The expiry date of the batch.
+     * @param quantity    The initial stock count of the batch.
+     * @param expiryDate  The expiry date of the batch.
      */
     public Batch(int batchNumber, int quantity, LocalDate expiryDate) {
         this.batchNumber = batchNumber;
@@ -35,6 +36,10 @@ public class Batch {
 
     public LocalDate getExpiryDate() {
         return expiryDate;
+    }
+
+    public void reduceQuantity(int quantity) {
+        this.quantity -= quantity;
     }
 
 }
