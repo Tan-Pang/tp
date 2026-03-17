@@ -1,7 +1,4 @@
-package medistock.batch;
-
-
-import medistock.inventory.Inventory;
+package medistock.inventory;
 
 import medistock.exception.MediStockException;
 import medistock.parser.Parser;
@@ -9,7 +6,6 @@ import medistock.ui.Ui;
 import org.junit.jupiter.api.Test;
 
 import medistock.command.BatchCommand;
-import medistock.inventory.InventoryItem;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
