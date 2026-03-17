@@ -23,8 +23,10 @@ public class Parser {
             return prepareBatch(text);
         } else if (text.startsWith("withdraw")) {
             return prepareWithdraw(text);
-        } else if (text.startsWith("delete")) {
+        } else if (text.startsWith("delete n/")) {
             return prepareDeleteName(text);
+        } else if (text.startsWith("delete i/")) {
+            return prepareDeleteIndex(text);
         } else if (text.equals("list")) {
             return new ListCommand();
         } else if (text.startsWith("exit") || text.startsWith("quit")) {
